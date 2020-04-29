@@ -53,7 +53,7 @@ export default {
         this.address = value;
         this.history.unshift(resultItem);
 
-        if (this.history.length > 5) this.history.pop();
+        if (this.history.length > 6) this.history.pop();
       }
 
       this.result.showResult = true;
