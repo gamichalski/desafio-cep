@@ -5,8 +5,9 @@
         class="input is-medium"
         type="text"
         :class="{ 'is-danger': !input.isValid }"
-        v-model="cep"
         :placeholder="input.placeholder"
+        v-model="cep"
+        :disabled="input.disabled"
         @keyup.enter="searchCep"
       />
       <div v-if="!input.isValid">
@@ -43,6 +44,7 @@ export default {
       input: {
         placeholder: "Digite seu CEP",
         isValid: true,
+        disabled: false,
         errors: ""
       },
       button: {
@@ -62,6 +64,7 @@ export default {
   methods: {
     searchCep() {
       this.input.errors = getErrorMessage(this.$v.cep);
+      this.input.disabled = true;
       this.button.status = "is-loading";
 
       if (this.input.errors.length) {
@@ -72,8 +75,12 @@ export default {
           .then(data => {
             if (data && data.data) {
               this.$emit("address-found", data.data);
-              this.cep = "";
               this.input.errors = "";
+              this.input.disabled = false;
+
+              if (Object.keys(data.data).length) {
+                this.cep = "";
+              }
             }
           })
           .catch(err => {
