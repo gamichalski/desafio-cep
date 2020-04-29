@@ -6,8 +6,8 @@
         v-for="(address, index) in oldHistory"
         :key="index"
         class="panel-block"
-        >{{ address }}</a
-      >
+        v-html="address"
+      ></a>
     </div>
   </section>
 </template>

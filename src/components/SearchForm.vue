@@ -69,6 +69,7 @@ export default {
 
       if (this.input.errors.length) {
         this.input.isValid = false;
+        this.input.disabled = false;
         this.button.status = "";
       } else {
         return getAddress(this.cep)

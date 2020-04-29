@@ -46,8 +46,12 @@ export default {
       this.address = "";
 
       if (Object.keys(value).length) {
+        const resultItem = `<strong>${formatCep(
+          value.cep
+        )}</strong>&nbsp;- ${this.formatAddress(value)}`;
+
         this.address = value;
-        this.history.unshift(this.formatAddress(value));
+        this.history.unshift(resultItem);
 
         if (this.history.length > 5) this.history.pop();
       }
