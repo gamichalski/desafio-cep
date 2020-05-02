@@ -32,12 +32,6 @@
         </button>
       </div>
     </div>
-    <div
-      class="error-Message has-text-weight-bold has-text-centered"
-      v-show="errorMessage"
-    >
-      <h5 class="title is-5">Nenhum CEP encontrado</h5>
-    </div>
   </div>
 </template>
 
@@ -49,7 +43,6 @@ import { getValidatorMessages } from "@/utils/validators";
 export default {
   data() {
     return {
-      errorMessage: false,
       isLoading: false,
       inputCep: ""
     };
@@ -61,7 +54,7 @@ export default {
         searchCep(this.inputCep)
           .then(({ data }) => {
             if (data.length === 0) {
-              this.errorMessage = true;
+              this.$emit("infoInputCep", { length: 0, cep: this.inputCep });
             } else {
               this.$emit("infoInputCep", data);
             }
@@ -73,7 +66,6 @@ export default {
       } else {
         this.isLoading = false;
       }
-      this.errorMessage = false;
     }
   },
   validations: {

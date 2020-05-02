@@ -28,7 +28,6 @@ export default {
   },
   methods: {
     infoInputCep(infoCep) {
-      console.log(infoCep);
       this.listCeps.unshift(infoCep);
     }
   },
